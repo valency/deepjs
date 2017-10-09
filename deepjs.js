@@ -60,6 +60,14 @@ Array.prototype.max = function () {
     return Math.max.apply(null, this);
 };
 
+Array.prototype.float = function () {
+    var n = [];
+    for (var i = 0; i < this.length; i++) {
+        n.push(parseFloat(this[i]));
+    }
+    return n;
+};
+
 Array.prototype.min = function () {
     return Math.min.apply(null, this);
 };
@@ -214,6 +222,32 @@ function Deepdict(dict) {
             }
         }
         return this.dict;
+    };
+    this.min = function () {
+        var keys = Object.keys(this.dict);
+        var keys_float = keys.float();
+        var keys_min = keys_float.min();
+        var keys_id = keys_float.indexOf(keys_min);
+        if (isNaN(keys_min)) {
+            return [];
+        } else {
+            var d = (new Deepdict(this.dict[keys[keys_id]])).min();
+            d.push(keys[keys_id]);
+            return d;
+        }
+    };
+    this.max = function () {
+        var keys = Object.keys(this.dict);
+        var keys_float = keys.float();
+        var keys_max = keys_float.max();
+        var keys_id = keys_float.indexOf(keys_max);
+        if (isNaN(keys_max)) {
+            return [];
+        } else {
+            var d = (new Deepdict(this.dict[keys[keys_id]])).max();
+            d.push(keys[keys_id]);
+            return d;
+        }
     };
 }
 
