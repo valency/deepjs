@@ -193,6 +193,21 @@ function Deeptime(t) {
     this.timezone = function (from, to) {
         return new Deeptime(moment.tz(this.t, from).clone().tz(to));
     };
+    this.range = function () {
+        var seconds = (this.t / 1000).toFixed(0);
+        var minutes = (this.t / (1000 * 60)).toFixed(0);
+        var hours = (this.t / (1000 * 60 * 60)).toFixed(0);
+        var days = (this.t / (1000 * 60 * 60 * 24)).toFixed(0);
+        if (seconds < 60) {
+            return seconds + " 秒";
+        } else if (minutes < 60) {
+            return minutes + " 分钟";
+        } else if (hours < 24) {
+            return hours + " 小时";
+        } else {
+            return days + " 日"
+        }
+    }
 }
 
 function Deepdict(dict) {
