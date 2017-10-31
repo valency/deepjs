@@ -52,6 +52,16 @@ Array.prototype.locateByKeyValue = function (key, value) {
     return -1;
 };
 
+Array.prototype.joinByKey = function (key) {
+    var n = [];
+    for (var i = 0; i < this.length; i++) {
+        if (this[i].hasOwnProperty(key)) {
+            n.push(this[i][key]);
+        }
+    }
+    return n;
+};
+
 Array.prototype.randomItem = function () {
     return this[Math.floor(Math.random() * this.length)];
 };
@@ -60,16 +70,16 @@ Array.prototype.max = function () {
     return Math.max.apply(null, this);
 };
 
+Array.prototype.min = function () {
+    return Math.min.apply(null, this);
+};
+
 Array.prototype.float = function () {
     var n = [];
     for (var i = 0; i < this.length; i++) {
         n.push(parseFloat(this[i]));
     }
     return n;
-};
-
-Array.prototype.min = function () {
-    return Math.min.apply(null, this);
 };
 
 $.fn.enter = function (fnc) {
